@@ -1,0 +1,256 @@
+{layout name="common/layout" /}
+  <!-- chartjs js -->
+        <script src="/assets/plugins/chartjs/chart.min.js"></script>
+        <script src="/assets/pages/chartjs.init.js"></script>  
+
+<div class="page-title-box">
+    <div class="row align-items-center">
+        <div class="col-sm-6">
+            <h4 class="page-title">数据概览</h4>
+        </div>
+<!--        <div class="col-sm-6">
+
+            <div class="float-right">
+                <div class="text-center">
+                          <a class="btn btn-primary buttons-copy buttons-html5" tabindex="0" 
+                                                   data-toggle="modal" data-target=".bs-example-modal-sm"
+                                                   aria-controls="datatable-buttons" href="{:url('incubatorinfo/reportcenter', ['export' => 'Y'])}">
+                                                    <span>数据导出</span>
+                                                </a>
+                    <a class="btn btn-primary buttons-copy buttons-html5" tabindex="0" 
+                       aria-controls="datatable-buttons" href="{:url('incubatorinfo/reportcenter', ['export' => 'Y'])}">
+                        <span>数据导出</span>
+                    </a>
+                </div>
+
+                <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p>数据导出完成。请前往"报告中心->报告下载"处下载报告。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+<div class="col-sm-6">
+                    <div class="dt-buttons btn-group float-right">
+                                <a class="btn btn-primary buttons-copy buttons-html5" tabindex="0" 
+                                   aria-controls="datatable-buttons" onclick="javascript:alert('请前往【报告中心-报告下载】查询');" href="{:url('incubatorinfo/reportcenter', ['export' => 'Y'])}">
+                                    <span>数据导出</span>
+                                </a>
+                            </div>
+     </div>
+    </div>
+
+</div>
+<!-- Dashboard Counts Section-->
+<div class="row">
+
+    <div class="col-sm-6 col-xl-3">
+        <div class="card">
+            <div class="card-heading p-4">
+
+                <div>
+                    <h5 class="font-16">设备数量(台)</h5>
+                </div>
+                <h3 class="mt-4">4{$incubcount}</h3>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-6 col-xl-3">
+        <div class="card">
+            <div class="card-heading p-4">
+
+                <div>
+                    <h5 class="font-16">本月维修次数</h5>
+                </div>
+                <h3 class="mt-4">{$patientcount}</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-6 col-xl-3">
+        <div class="card">
+            <div class="card-heading p-4">
+
+                <div>
+                    <h5 class="font-16">本月计划检查数量</h5>
+                </div>
+                <h3 class="mt-4">{$plancount}</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-6 col-xl-3">
+        <div class="card">
+            <div class="card-heading p-4">
+
+                <div>
+                    <h5 class="font-16">本月实际检查次数</h5>
+                </div>
+                <h3 class="mt-4">{$cleancount}</h3>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="row">
+
+    <div class="col-sm-6 col-xl-4">
+        <div class="card">
+            <div class="card-heading p-4">
+
+                <div>
+                    <h5 class="font-16">今日检查-完成次数</h5>
+                </div>
+                <h3 class="mt-4">{$todaycleancount}</h3>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-sm-6 col-xl-4">
+        <div class="card">
+            <div class="card-heading p-4">
+
+                <div>
+                    <h5 class="font-16">今日检查-未完成次数</h5>
+                </div>
+                <h3 class="mt-4">{$gapcount}</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-6 col-xl-4">
+        <div class="card">
+            <div class="card-heading p-4">
+
+                <div>
+                    <h5 class="font-16">昨日检查遗漏设备数</h5>
+                </div>
+                <h3 class="mt-4">{$yesgapcount}</h3>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+<!--charts start-->
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card m-b-30">
+            <div class="card-body">
+
+                <h4 class="mt-0 header-title">检查工作量趋势分析</h4>
+
+                <ul class="list-inline widget-chart m-t-20 m-b-15 text-center">
+                    <li class="list-inline-item">
+                        <h5>{$curmonthpercent}%</h5>
+                        <p class="text-muted">本月巡检计划完成率</p>
+                    </li>
+                    <li class="list-inline-item">
+                        <h5>{$lastmonthpercent}%</h5>
+                        <p class="text-muted">上月巡检计划完成率</p>
+                    </li>
+                    <li class="list-inline-item">
+                        <h5>{$yearpercent}%</h5>
+                        <p class="text-muted">本年巡检计划完成率</p>
+                    </li>
+                </ul>
+
+                <canvas id="lineChart" height="300"></canvas>
+
+            </div>
+        </div>
+    </div> <!-- end col -->
+
+
+</div> <!-- end row -->
+
+<!--top billboard-->
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="text-center">
+            <h5>本月医护巡检工作量排行榜</h5>
+            <p class="text-muted">统计本月已经发生的巡检，包括每日检查、周检查等，取前4名的医护 </p>
+        </div>
+    </div>
+</div>
+
+<div class="row m-t-30">
+    {foreach $nursecleancount as $v}
+    <div class="col-xl-3 col-md-6">
+        <div class="card pricing-box mt-4">
+            <div class="pricing-icon">
+                <i class="ti-shield bg-success"></i>
+            </div>
+            <div class="pricing-content">
+                <div class="text-center">
+                    <h5 class="text-uppercase mt-5">{$v.operatorname}</h5>
+                    <div class="pricing-plan mt-4 pt-2">
+                        <h1>{$v.countid}<small class="font-16">次</small></h1>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    {/foreach}
+</div>
+<!--miss table-->
+<div class="row">
+    <div class="col-12">
+        <div class="card m-b-30">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="panel panel-default">
+                            <div class="p-2">
+                                <h3 class="panel-title font-20"><strong>本月任务误漏统计</strong></h3>
+                            </div>
+                            <div class="">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <td><strong>设备编号</strong></td>
+                                                <td class="text-center"><strong>设备类型</strong></td>
+                                                <td class="text-center"><strong>遗漏天数</strong>
+                                                </td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- foreach ($order->lineItems as $line) or some such thing here -->
+                                            {foreach $missclean as $v}
+                                            <tr>
+                                                <td>{$v.code}</td>
+                                                <td class="text-center">{$v.type}</td>
+                                                <td class="text-center">{$v.total}</td>
+                                            </tr>
+                                            {/foreach}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div> <!-- end row -->
+
+            </div>
+        </div>
+    </div> <!-- end col -->
+</div> <!-- end row -->    
+<!-- Feeds Section-->

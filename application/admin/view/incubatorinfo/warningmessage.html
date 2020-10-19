@@ -1,0 +1,93 @@
+{layout name="common/layout" /}
+<div class="page-title-box">
+    <div class="row align-items-center">
+        <div class="col-sm-6">
+            <h4 class="page-title">预警消息</h4>
+            {include file="common/alert" /}
+        </div>
+    </div>
+    <!-- end row -->
+</div>
+<!-- end page-title -->
+<!-- START ROW -->
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card m-b-30">
+            <div class="card-body">
+
+                
+           
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">床位号</th>
+                                    <th scope="col">使用状态</th>
+                                    <th scope="col">类型</th>
+                                    <th scope="col">病区</th>
+                                    <th scope="col">今日消毒状态</th>
+                                    <th scope="col">本周消毒状态</th>
+                                    <th scope="col" >终末消毒日期</th>
+                                    <th scope="col" ></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {foreach $incubatorinfo as $v}
+                                {if $v.dailycleandt<date("Y-m-d")  }
+                                <tr>
+                                    <td>{$v.code}</td>
+                                    <td><span   {if $v.status==='使用中'}class="badge badge-warning"{/if}
+                                            {if $v.status==='空闲'}class="badge badge-primary"{/if}
+                                            {if $v.status==='预留'}class="badge badge-success"{/if}
+                                            {if $v.status==='待消毒'}class="badge badge-danger"{/if}>
+                                            {$v.status}</span></td>
+                                    <td>{$v.type}</td>
+                                    <td>{$v.room}</td>
+                                    <td {if $v.dailycleandt<date("Y-m-d")  }class="text-danger"{/if}>{if $v.dailycleandt>date("Y-m-d")  }已完成{else}
+                                        未完成{/if}</td>
+                                    <td {if $v.weeklycleandt<date('Y-m-d', strtotime('monday this week'))}class="text-danger"{/if}>
+                                        {if $v.weeklycleandt>date('Y-m-d', strtotime('monday this week'))}已完成{else}
+                                        未完成{/if}</td>
+                                    <td>{$v.cleandt}</td>
+
+                                    <td>
+                                        <div class="btn-group m-b-10">
+                                            <button type="button" class="btn btn-primary">操作</button>
+                                            <button type="button"
+                                                    class="btn btn-primary dropdown-toggle dropdown-toggle-split"
+                                                    data-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="false">
+                                                <span class="sr-only">Toggle Dropdown</span>
+                                            </button>
+                                            <div class="dropdown-menu" x-placement="bottom-start"
+                                                 style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(75px, 34px, 0px);">
+                                                {if $v.dailyplan==1}
+                                                <a href="#" class="dropdown-item " onclick="window.location.href = '../incubatorinfo/confirmclean.html?cleantype=每日消毒&id={$v.id}'"> 每日消毒</a>
+                                                {/if}
+                                                {if $v.weeklyplan==1}
+                                                <a href="#" class="dropdown-item" onclick="window.location.href = '../incubatorinfo/confirmclean.html?cleantype=每周消毒&id={$v.id}'"> 每周消毒</a>
+                                                {/if}
+                                                <a href="#" class="dropdown-item" onclick="window.location.href = '../incubatorinfo/confirmclean.html?cleantype=彻底消毒&id={$v.id}'"> 终末消毒</a>
+                                                <div class="dropdown-divider"></div>
+                                                {if $v.status=="空闲" or $v.status=="预留"}
+                                                <a class="dropdown-item" href="#" onclick="window.location.href = '../incubatorinfo/enterincubator.html?id={$v.id}'">病患入箱</a>
+                                                {/if}
+                                                {if $v.status=="使用中"}
+                                                <a class="dropdown-item" href="#" onclick="window.location.href = '../incubatorinfo/leaveincubator.html?id={$v.id}'">病患离箱</a>
+                                                {/if}
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {/if}
+                                {/foreach}
+                            </tbody>
+                        </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+<!-- END ROW -->
+

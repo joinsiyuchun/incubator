@@ -1,0 +1,68 @@
+{layout name="common/layout" /}
+<div class="page-title-box">
+    <div class="row align-items-center">
+        <div class="col-sm-6">
+            <h4 class="page-title">设备预留</h4>
+        </div>
+        <div class="col-sm-6">
+            <ol class="breadcrumb float-right">
+                <li class="breadcrumb-item"><a href="javascript:void(0);">后台管理</a></li>
+                <li class="breadcrumb-item"><a href="javascript:void(0);">维修管理</a></li>
+                <li class="breadcrumb-item active">设备预留</li>
+            </ol>
+        </div>
+    </div> <!-- end row -->
+</div>
+<!-- Forms Section-->
+<section class="forms"> 
+    <div class="container-fluid">
+
+
+        <!-- Basic Form-->
+        {include file="common/alert" /}
+        <div class="card">
+
+            <div class="card-body">
+                <p>编号：{$incubinfo.code}号 所在房间：{$incubinfo.room}</p>
+                <form>
+                    <div class="form-group row">
+                        <label class="col-sm-2 form-control-label">预留原因</label>
+                        
+                        <input type="text" name="patientno" class="form-control col-sm-10">
+                        <input type="hidden" name="action" value="add" class="form-control">
+                        <input type="hidden" name="id" value="{$incubinfo.id}"  class="form-control">
+                        <input type="hidden" name="code" value="{$incubinfo.code}"  class="form-control">
+                        
+                    </div>
+                    <div class="form-group row">       
+                        <label class="form-control-label col-sm-2">新旧程度</label>
+                        <input type="text" name="patientname" class="form-control col-sm-10">
+                    </div>
+                    
+                    <div class="form-group row">       
+                        <label class="form-control-label col-sm-2">联系人</label>
+                        <input type="text" name="contact" class="form-control col-sm-10">
+                    </div>
+                    <div class="form-group row">       
+                        <label class="form-control-label col-sm-2">联系方式</label>
+                        <input type="text" name="contactinfo" class="form-control col-sm-10">
+                    </div>
+                    <div class="form-group row">       
+                        <label class="form-control-label col-sm-2">备注</label>
+                        <textarea name="memo"  rows="3" cols="20" class="form-control col-sm-10" ></textarea>
+                    </div>
+                    <div class="form-group row float-right">
+                        <div class="col-sm-12">
+                            <button type="reset" class="btn btn-secondary">重置条件</button>
+                            <button type="submit" class="btn btn-primary">提交保存</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+

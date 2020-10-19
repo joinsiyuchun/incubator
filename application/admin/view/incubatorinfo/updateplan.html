@@ -1,0 +1,78 @@
+{layout name="common/layout" /}
+<!-- Page Header-->
+<header class="page-header">
+    <div class="container-fluid">
+        <h2 class="no-margin-bottom">编辑消毒计划</h2>
+    </div>
+</header>
+<!-- Forms Section-->
+ <section class="forms"> 
+            <div class="container-fluid">
+            
+                <!-- Basic Form-->
+               {include file="common/alert" /}
+                  <div class="card">
+                    
+                    <div class="card-header d-flex align-items-center">
+                      <h3 class="h4">编辑</h3>
+                    </div>
+                    <div class="card-body">
+                      
+                      <form>
+                        <div class="form-group">       
+                          <label class="form-control-label">计划编号</label>
+                           <input name="code" value="{$planinfo.code}" type="text" class="form-control" required/>
+                           <input type="hidden" name="action" value="add" class="form-control">
+                           <input type="hidden" name="id" value="{$planinfo.id}"  class="form-control">
+                        </div>
+                         <div class="form-group">       
+                          <label class="form-control-label">计划说明</label>
+                          <input type="text" name="memo" value="{$planinfo.memo}" class="form-control" >
+                        </div>
+                       
+                        <div class="form-group row">
+                                <label class="col-sm-3 form-control-label">计划执行周期</label>
+                                <div class="col-sm-9">
+                                    <select name="plancycle" class="form-control mb-3" required>
+                                        <option {if $planinfo.plancycle==='每周消毒'}selected{/if}>每周消毒</option>
+                                        <option {if $planinfo.plancycle==='每天消毒'}selected{/if}>每天消毒</option>
+                                    </select>
+                                </div>
+                            </div>
+                          <div class="form-group row">
+                                <label class="col-sm-3 form-control-label">设备类型</label>
+                                <div class="col-sm-9">
+                                    <select name="type" class="form-control mb-3" required>
+                                        <option {if $planinfo.type==='婴儿暖箱'}selected{/if}>婴儿暖箱</option>
+                                        <option {if $planinfo.type==='婴儿转移箱'}selected{/if}>婴儿转移箱</option>
+                                        <option {if $planinfo.type==='婴儿光疗暖箱'}selected{/if}>婴儿光疗暖箱</option>
+                                        <option {if $planinfo.type==='婴儿辐射保暖台'}selected{/if}>婴儿辐射保暖台</option>
+                                        <option {if $planinfo.type==='其它'}selected{/if}>其它</option>
+                                    </select>
+                                </div>
+                            </div>
+                         <div class="form-group row">
+                                <label class="col-sm-3 form-control-label">消毒范围</label>
+                                <div class="col-sm-9">
+                                    <select name="room" class="form-control mb-3" required>
+                                        <option {if $planinfo.room==='1病房'}selected{/if}>1病房</option>
+                                        <option {if $planinfo.room==='2病房'}selected{/if}>2病房</option>
+                                        <option {if $planinfo.room==='3病房'}selected{/if}>3病房</option>
+                                        <option {if $planinfo.room==='4病房'}selected{/if}>4病房</option>
+                                        <option {if $planinfo.room==='5病房'}selected{/if}>5病房</option>
+                                        <option {if $planinfo.room==='6病房'}selected{/if}>6病房</option>
+                                        <option {if $planinfo.room==='7病房'}selected{/if}>7病房</option>
+                                        <option {if $planinfo.room==='8病房'}selected{/if}>8病房</option>
+                                    </select>
+                                </div>
+                            </div> 
+                        <div class="form-group">       
+                          <input type="submit" value="提交" class="btn btn-primary">
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                
+             </div>
+           
+    </section>

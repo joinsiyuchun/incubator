@@ -1,0 +1,464 @@
+{layout name="common/layout" /}
+<div class="page-title-box">
+    <div class="row align-items-center">
+        <div class="col-sm-6">
+            <h4 class="page-title">我的工作台-{$roomname}</h4>
+        </div>
+
+        <div class="col-sm-6">
+            <ol class="breadcrumb float-right">
+                <!-- --select room -->
+                <li class="dropdown breadcrumb-item">
+                    <a class="nav-link dropdown-toggle arrow-none waves-effect" data-toggle="dropdown" href="#"
+                       role="button" aria-haspopup="false" aria-expanded="false">
+                        选择病区 <span class="mdi mdi-chevron-down"></span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated language-switch">
+                        <a class="dropdown-item" href="{:url('index/index', ['room' => '*'])}"><span> 全部病区</span></a>
+
+                        {foreach $location as $v}
+                        <a class="dropdown-item" href="{:url('index/index', ['room' => $v.room])}"><span> {$v.room} </span></a>
+                        {/foreach}
+                    </div>
+                </li>
+<!--                <li class="dropdown breadcrumb-item">-->
+<!--                    <a class="nav-link dropdown-toggle arrow-none waves-effect" data-toggle="dropdown" href="#"-->
+<!--                       role="button" aria-haspopup="false" aria-expanded="false">-->
+<!--                        显示方式 <span class="mdi mdi-chevron-down"></span>-->
+<!--                    </a>-->
+<!--                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated language-switch">-->
+<!--                        <a class="dropdown-item" href="{:url('index/index', ['room' => $room])}"><span>列表</span></a>-->
+<!--                        <a class="dropdown-item" href="{:url('incubatorinfo/searchbyroom', ['room' => $room])}"><span>看板</span></a>-->
+<!--                    </div>-->
+<!--                </li>-->
+            </ol>
+        </div>
+
+    </div>
+    <!-- end row -->
+</div>
+<!-- end page-title -->
+
+<div class="row">
+
+    <div class="col-sm-6 col-xl-3">
+        <div class="card">
+            <div class="card-heading p-4">
+                <div class="mini-stat-icon float-right">
+                    <i class="mdi mdi-cube-outline bg-primary  text-white"></i>
+                </div>
+                <div>
+                    <h5 class="font-16">在用</h5>
+                </div>
+                <h3 class="mt-4">{$total_available}</h3>
+                <div class="progress mt-4" style="height: 4px;">
+                    <div class="progress-bar bg-primary" role="progressbar" style="width: {$dailycleanpercent*100}%"
+                         aria-valuenow="{$dailycleanpercent}" aria-valuemin="0" aria-valuemax="1"></div>
+                </div>
+                <p class="text-muted mt-2 mb-0">在用率<span class="float-right">{$dailycleanpercent*100}%</span></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-6 col-xl-3">
+        <div class="card">
+            <div class="card-heading p-4">
+                <div class="mini-stat-icon float-right">
+                    <i class="mdi mdi-briefcase-check bg-success text-white"></i>
+                </div>
+                <div>
+                    <h5 class="font-16">备机</h5>
+                </div>
+                <h3 class="mt-4">{$total_reserve}</h3>
+                <div class="progress mt-4" style="height: 4px;">
+                    <div class="progress-bar bg-success" role="progressbar" style="width: {$dailycleanpercentreseve*100}%"
+                         aria-valuenow="{$dailycleanpercentreseve}" aria-valuemin="0" aria-valuemax="1"></div>
+                </div>
+                <p class="text-muted mt-2 mb-0">备机率<span class="float-right">{$dailycleanpercentreseve*100}%</span></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-6 col-xl-3">
+        <div class="card">
+            <div class="card-heading p-4">
+                <div class="mini-stat-icon float-right">
+                    <i class="mdi mdi-tag-text-outline bg-warning text-white"></i>
+                </div>
+                <div>
+                    <h5 class="font-16">报修待接修</h5>
+                </div>
+                <h3 class="mt-4">{$total_inuse}</h3>
+                <div class="progress mt-4" style="height: 4px;">
+                    <div class="progress-bar bg-warning" role="progressbar" style="width: {$dailycleanpercentinuse*100}%"
+                         aria-valuenow="{$dailycleanpercentinuse}" aria-valuemin="0" aria-valuemax="1"></div>
+                </div>
+                <p class="text-muted mt-2 mb-0">报修率<span class="float-right">{$dailycleanpercentinuse*100}%</span></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-6 col-xl-3">
+        <div class="card">
+            <div class="card-heading p-4">
+                <div class="mini-stat-icon float-right">
+                    <i class="mdi mdi-buffer bg-danger text-white"></i>
+                </div>
+                <div>
+                    <h5 class="font-16">维修中</h5>
+                </div>
+                <h3 class="mt-4">{$total_waitingclean}</h3>
+                <div class="progress mt-4" style="height: 4px;">
+                    <div class="progress-bar bg-danger" role="progressbar" style="width: {$dailycleanpercentwait*100}%"
+                         aria-valuenow="{$dailycleanpercentwait}" aria-valuemin="0" aria-valuemax="1"></div>
+                </div>
+                <p class="text-muted mt-2 mb-0">接修率<span class="float-right">{$dailycleanpercentwait*100}%</span></p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- end row -->
+
+
+<!-- START ROW -->
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card m-b-30">
+            <div class="card-body">
+
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#all" role="tab" aria-selected="true">
+                            <span class="d-none d-md-block">全部</span><span class="d-block d-md-none"><i class="mdi mdi-home-variant h5"></i></span> 
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#available" role="tab" aria-selected="false">
+                            <span class="d-none d-md-block">在用</span><span class="d-block d-md-none"><i class="mdi mdi-account h5"></i></span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#reserve" role="tab" aria-selected="false">
+                            <span class="d-none d-md-block">备机</span><span class="d-block d-md-none"><i class="mdi mdi-email h5"></i></span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#inuse" role="tab" aria-selected="false">
+                            <span class="d-none d-md-block">已报修待接修</span><span class="d-block d-md-none"><i class="mdi mdi-settings h5"></i></span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#clean" role="tab" aria-selected="false">
+                            <span class="d-none d-md-block">维修中</span><span class="d-block d-md-none"><i class="mdi mdi-settings h5"></i></span>
+                        </a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active " id="all" role="tabpanel">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">设备号</th>
+                                    <th scope="col">使用状态</th>
+                                    <th scope="col">类型</th>
+                                    <th scope="col">病区</th>
+                                    <th scope="col">今日检查状态</th>
+                                    <th scope="col">本周检查状态</th>
+                                    <th scope="col" >最近修复日期</th>
+                                    <th scope="col" ></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {foreach $incubtotal as $v}
+                                <tr>
+                                    <td>{$v.code}</td>
+                                    <td><span   {if $v.status==='报修待接修'}class="badge badge-warning"{/if}
+                                            {if $v.status==='在用'}class="badge badge-primary"{/if}
+                                            {if $v.status==='备机'}class="badge badge-success"{/if}
+                                            {if $v.status==='维修中'}class="badge badge-danger"{/if}>
+                                            {$v.status}</span></td>
+                                    <td>{$v.type}</td>
+                                    <td>{$v.room}</td>
+                                    <td {if $v.dailycleandt<date("Y-m-d")  }class="text-danger"{/if}>{if $v.dailycleandt>date("Y-m-d")  }已完成{else}
+                                        未完成{/if}</td>
+                                    <td {if $v.weeklycleandt<date('Y-m-d', strtotime('monday this week'))}class="text-danger"{/if}>
+                                        {if $v.weeklycleandt>date('Y-m-d', strtotime('monday this week'))}已完成{else}
+                                        未完成{/if}</td>
+                                    <td>{$v.cleandt}</td>
+
+                                    <td>
+                                        <div class="btn-group m-b-10">
+                                            <button type="button" class="btn btn-primary">操作</button>
+                                            <button type="button"
+                                                    class="btn btn-primary dropdown-toggle dropdown-toggle-split"
+                                                    data-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="false">
+                                                <span class="sr-only">Toggle Dropdown</span>
+                                            </button>
+                                            <div class="dropdown-menu" x-placement="bottom-start"
+                                                 style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(75px, 34px, 0px);">
+                                                {if $v.dailyplan==1}
+                                                <a href="#" class="dropdown-item " onclick="window.location.href = '../incubatorinfo/confirmclean.html?cleantype=每日检查&id={$v.id}'"> 每日检查</a>
+                                                {/if}
+                                                {if $v.weeklyplan==1}
+                                                <a href="#" class="dropdown-item" onclick="window.location.href = '../incubatorinfo/confirmclean.html?cleantype=每周检查&id={$v.id}'"> 每周检查</a>
+                                                {/if}
+
+                                                <div class="dropdown-divider"></div>
+                                                {if $v.status=="在用" or $v.status=="备机"}
+                                                <a class="dropdown-item" href="#" onclick="window.location.href = '../incubatorinfo/enterincubator.html?id={$v.id}'">报修</a>
+                                                {/if}
+                                                {if $v.status=="报修待接修"}
+                                                <a class="dropdown-item" href="#" onclick="window.location.href = '../incubatorinfo/leaveincubator.html?id={$v.id}'">接修</a>
+                                                {/if}
+                                                {if $v.status=="维修中"}
+                                                <a href="#" class="dropdown-item" onclick="window.location.href = '../incubatorinfo/confirmclean.html?cleantype=彻底检查&id={$v.id}'"> 维修完成</a>
+                                                {/if}
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {/foreach}
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--available start-->
+                    <div class="tab-pane  " id="available" role="tabpanel">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">设备号</th>
+                                    <th scope="col">使用状态</th>
+                                    <th scope="col">类型</th>
+                                    <th scope="col">病区</th>
+                                    <th scope="col">今日检查状态</th>
+                                    <th scope="col">本周检查状态</th>
+                                    <th scope="col" colspan="2">最近完修日期</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {foreach $incubavailable as $v}
+                                <tr>
+                                    <td>{$v.code}</td>
+                                    <td><span class="badge badge-primary">{$v.status}</span></td>
+                                    <td>{$v.type}</td>
+                                    <td>{$v.room}</td>
+                                    <td {if $v.dailycleandt<date("Y-m-d")  }class="text-danger"{/if}>{if $v.dailycleandt>date("Y-m-d")  }已完成{else}
+                                        未完成{/if}</td>
+                                    <td {if $v.weeklycleandt<date('Y-m-d', strtotime('monday this week'))}class="text-danger"{/if}>
+                                        {if $v.weeklycleandt>date('Y-m-d', strtotime('monday this week'))}已完成{else}
+                                        未完成{/if}</td>
+                                    <td>{$v.cleandt}</td>
+
+                                    <td>
+                                        <div class="btn-group m-b-10">
+                                            <button type="button" class="btn btn-primary">操作</button>
+                                            <button type="button"
+                                                    class="btn btn-primary dropdown-toggle dropdown-toggle-split"
+                                                    data-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="false">
+                                                <span class="sr-only">Toggle Dropdown</span>
+                                            </button>
+                                            <div class="dropdown-menu" x-placement="bottom-start"
+                                                 style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(75px, 34px, 0px);">
+                                                {if $v.dailyplan==1}
+                                                <a href="#" class="dropdown-item " onclick="window.location.href = '../incubatorinfo/confirmclean.html?cleantype=每日检查&id={$v.id}'"> 每日检查</a>
+                                                {/if}
+                                                {if $v.weeklyplan==1}
+                                                <a href="#" class="dropdown-item" onclick="window.location.href = '../incubatorinfo/confirmclean.html?cleantype=每周检查&id={$v.id}'"> 每周检查</a>
+                                                {/if}
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" href="#" onclick="window.location.href = '../incubatorinfo/enterincubator.html?id={$v.id}'">报修</a>
+
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {/foreach}
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--availabel end-->
+                    <!--reserve start-->
+                    <div class="tab-pane  " id="reserve" role="tabpanel">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">设备号</th>
+                                    <th scope="col">使用状态</th>
+                                    <th scope="col">类型</th>
+                                    <th scope="col">病区</th>
+                                    <th scope="col">今日检查状态</th>
+                                    <th scope="col">本周检查状态</th>
+                                    <th scope="col" >最近完修日期</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {foreach $incubreserv as $v}
+                                <tr>
+                                    <td>{$v.code}</td>
+                                    <td><span class="badge badge-success">{$v.status}</span></td>
+                                    <td>{$v.type}</td>
+                                    <td>{$v.room}</td>
+                                    <td {if $v.dailycleandt<date("Y-m-d")  }class="text-danger"{/if}>{if $v.dailycleandt>date("Y-m-d")  }已完成{else}
+                                        未完成{/if}</td>
+                                    <td {if $v.weeklycleandt<date('Y-m-d', strtotime('monday this week'))}class="text-danger"{/if}>
+                                        {if $v.weeklycleandt>date('Y-m-d', strtotime('monday this week'))}已完成{else}
+                                        未完成{/if}</td>
+                                    <td>{$v.cleandt}</td>
+
+                                    <td>
+                                        <div class="btn-group m-b-10">
+                                            <button type="button" class="btn btn-primary">操作</button>
+                                            <button type="button"
+                                                    class="btn btn-primary dropdown-toggle dropdown-toggle-split"
+                                                    data-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="false">
+                                                <span class="sr-only">Toggle Dropdown</span>
+                                            </button>
+                                            <div class="dropdown-menu" x-placement="bottom-start"
+                                                 style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(75px, 34px, 0px);">
+                                                {if $v.dailyplan==1}
+                                                <a href="#" class="dropdown-item " onclick="window.location.href = '../incubatorinfo/confirmclean.html?cleantype=每日检查&id={$v.id}'"> 每日检查</a>
+                                                {/if}
+                                                {if $v.weeklyplan==1}
+                                                <a href="#" class="dropdown-item" onclick="window.location.href = '../incubatorinfo/confirmclean.html?cleantype=每周检查&id={$v.id}'"> 每周检查</a>
+                                                {/if}
+                                                <a href="#" class="dropdown-item" onclick="window.location.href = '../incubatorinfo/confirmclean.html?cleantype=彻底检查&id={$v.id}'"> 设备启用</a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" href="#" onclick="window.location.href = '../incubatorinfo/enterincubator.html?id={$v.id}'">报修</a>
+
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {/foreach}
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--reserve end-->
+                    <!--inuse start-->
+                    <div class="tab-pane  " id="inuse" role="tabpanel">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">设备号</th>
+                                    <th scope="col">使用状态</th>
+                                    <th scope="col">类型</th>
+                                    <th scope="col">病区</th>
+                                    <th scope="col">今日检查状态</th>
+                                    <th scope="col">本周检查状态</th>
+                                    <th scope="col" colspan="2">最近完修日期</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {foreach $incubinuse as $v}
+                                <tr>
+                                    <td>{$v.code}</td>
+                                    <td><span class="badge badge-warning">{$v.status}</span></td>
+                                    <td>{$v.type}</td>
+                                    <td>{$v.room}</td>
+                                    <td {if $v.dailycleandt<date("Y-m-d")  }class="text-danger"{/if}>{if $v.dailycleandt>date("Y-m-d")  }已完成{else}
+                                        未完成{/if}</td>
+                                    <td {if $v.weeklycleandt<date('Y-m-d', strtotime('monday this week'))}class="text-danger"{/if}>
+                                        {if $v.weeklycleandt>date('Y-m-d', strtotime('monday this week'))}已完成{else}
+                                        未完成{/if}</td>
+                                    <td>{$v.cleandt}</td>
+
+                                    <td>
+                                        <div class="btn-group m-b-10">
+                                            <button type="button" class="btn btn-primary">操作</button>
+                                            <button type="button"
+                                                    class="btn btn-primary dropdown-toggle dropdown-toggle-split"
+                                                    data-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="false">
+                                                <span class="sr-only">Toggle Dropdown</span>
+                                            </button>
+                                            <div class="dropdown-menu" x-placement="bottom-start"
+                                                 style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(75px, 34px, 0px);">
+                                                {if $v.dailyplan==1}
+                                                <a href="#" class="dropdown-item " onclick="window.location.href = '../incubatorinfo/confirmclean.html?cleantype=每日检查&id={$v.id}'"> 每日检查</a>
+                                                {/if}
+                                                {if $v.weeklyplan==1}
+                                                <a href="#" class="dropdown-item" onclick="window.location.href = '../incubatorinfo/confirmclean.html?cleantype=每周检查&id={$v.id}'"> 每周检查</a>
+                                                {/if}
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" href="#" onclick="window.location.href = '../incubatorinfo/leaveincubator.html?id={$v.id}'">设备接修</a>
+
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {/foreach}
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--inuse end-->
+                    <!--clean start-->
+                    <div class="tab-pane  " id="clean" role="tabpanel">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">设备号</th>
+                                    <th scope="col">使用状态</th>
+                                    <th scope="col">类型</th>
+                                    <th scope="col">病区</th>
+                                    <th scope="col">今日检查状态</th>
+                                    <th scope="col">本周检查状态</th>
+                                    <th scope="col" colspan="2">最近完修日期</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {foreach $incubclean as $v}
+                                <tr>
+                                    <td>{$v.code}</td>
+                                    <td><span class="badge badge-danger">{$v.status}</span></td>
+                                    <td>{$v.type}</td>
+                                    <td>{$v.room}</td>
+                                    <td {if $v.dailycleandt<date("Y-m-d")  }class="text-danger"{/if}>{if $v.dailycleandt>date("Y-m-d")  }已完成{else}
+                                        未完成{/if}</td>
+                                    <td {if $v.weeklycleandt<date('Y-m-d', strtotime('monday this week'))}class="text-danger"{/if}>
+                                        {if $v.weeklycleandt>date('Y-m-d', strtotime('monday this week'))}已完成{else}
+                                        未完成{/if}</td>
+                                    <td>{$v.cleandt}</td>
+
+                                    <td>
+                                        <div class="btn-group m-b-10">
+                                            <button type="button" class="btn btn-primary">操作</button>
+                                            <button type="button"
+                                                    class="btn btn-primary dropdown-toggle dropdown-toggle-split"
+                                                    data-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="false">
+                                                <span class="sr-only">Toggle Dropdown</span>
+                                            </button>
+                                            <div class="dropdown-menu" x-placement="bottom-start"
+                                                 style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(75px, 34px, 0px);">
+                                                {if $v.dailyplan==1}
+                                                <a href="#" class="dropdown-item " onclick="window.location.href = '../incubatorinfo/confirmclean.html?cleantype=每日检查&id={$v.id}'"> 每日检查</a>
+                                                {/if}
+                                                {if $v.weeklyplan==1}
+                                                <a href="#" class="dropdown-item" onclick="window.location.href = '../incubatorinfo/confirmclean.html?cleantype=每周检查&id={$v.id}'"> 每周检查</a>
+                                                {/if}
+                                                <a href="#" class="dropdown-item" onclick="window.location.href = '../incubatorinfo/confirmclean.html?cleantype=彻底检查&id={$v.id}'"> 维修完成</a>
+
+
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {/foreach}
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--clean end-->
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- END ROW -->
+

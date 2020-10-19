@@ -1,0 +1,114 @@
+{layout name="common/layout" /}
+<div class="page-title-box">
+    <div class="row align-items-center">
+        <div class="col-sm-6">
+            <h4 class="page-title">工单信息</h4>
+        </div>
+        <div class="col-sm-6">
+            <ol class="breadcrumb float-right">
+                <li class="breadcrumb-item"><a href="javascript:void(0);">后台管理</a></li>
+                <li class="breadcrumb-item"><a href="javascript:void(0);">消毒管理</a></li>
+                <li class="breadcrumb-item active">使用记录</li>
+            </ol>
+        </div>
+    </div> <!-- end row -->
+</div>
+<!-- Forms Section-->
+<section class="forms"> 
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Form Elements -->
+            <div class="col-lg-12">
+                <div class="card">
+
+                    <div class="card-body">
+                        {include file="common/alert" /}
+
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label">报修号: {$order.code}</label>
+                                <input type="hidden" name="action" value="taken" class="form-control">
+                                <input type="hidden" name="id" value="{$order.id}" class="form-control">
+                                <input type="hidden" name="val" value="1" class="form-control">
+                                 <label class="col-sm-4 col-form-label">工单结算时间: {$order.taken_time}</label>
+
+                                  <label class="col-sm-4 col-form-label">报修时间: {$order.pay_time}</label>
+                                <div class="col-sm-2">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-form-label">备注: {$order.comment}</label>
+
+                            </div>
+                            <div class="form-group row float-right">
+                                <div class="col-sm-12">
+                                    <div class="btn-group m-b-12">
+                                        <button type="button" class="btn btn-primary">工单结算</button>
+                                        <button type="button"
+                                                class="btn btn-primary dropdown-toggle dropdown-toggle-split"
+                                                data-toggle="dropdown" aria-haspopup="true"
+                                                aria-expanded="false">
+                                            <span class="sr-only">Toggle Dropdown</span>
+                                        </button>
+                                        <div class="dropdown-menu" x-placement="bottom-start"
+                                             style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(75px, 34px, 0px);">
+                                            <a href="#" class="dropdown-item " onclick="window.location.href = '../order/confirm.html?confirmtype=0&id={$order.id}'">工单取消</a>
+                                            <a href="#" class="dropdown-item" onclick="window.location.href = '../order/confirm.html?confirmtype=1&id={$order.id}'"> 维保内结算</a>
+                                            <a href="#" class="dropdown-item" onclick="window.location.href = '../order/confirm.html?confirmtype=2&id={$order.id}'"> 保外付费结算</a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-xs-12">
+    <div class="card">
+
+        <div class="card-body no-padding">
+            <table class="datatable table table-striped primary" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th>设备编号</th>
+                        <th>设备类型</th>
+                        <th>序列号</th>
+                        <th>设备状态</th>
+                        <th>所在病房</th>
+                        <th>是否启用</th>
+                        <th>配件费用</th>
+                        <th>服务费用</th>
+                        <th>总费用</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                                     {foreach $incublist as $v}
+                                    <tr>
+                                        <td>{$v.id}</td>
+                                        <td>{$v.type}</td>
+                                        <td>{$v.seriesno}</td>
+                                        <td>{$v.status}</td>
+                                        <td>{$v.room}</td>
+                                        <td>{$v.available}</td>
+                                        <td>{$v.partcost}</td>
+                                        <td>{$v.servicecost}</td>
+                                        <td>{$v.servicecost+$v.partcost}</td>
+                                        <td><a href="{:url('order/updatecost', ['order_id' => $order.id,'incub_id' => $v.id])}" style="margin-right:7px;">维护</a></td>
+                                    </tr>
+                                 {/foreach}
+
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+    </div>
+
+
+      
+    
+    </section>

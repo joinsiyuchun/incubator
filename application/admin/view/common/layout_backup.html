@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Home</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="robots" content="all,follow">
+        <!-- Bootstrap CSS-->
+        <link rel="stylesheet" href="/static/vendor/bootstrap/css/bootstrap.min.css">
+        <!-- Font Awesome CSS-->
+        <link rel="stylesheet" href="/static/vendor/font-awesome/css/font-awesome.min.css">
+        <!-- Fontastic Custom icon font-->
+        <link rel="stylesheet" href="/static3/css/fontastic.css">
+        <!-- Google fonts - Poppins -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
+        <!-- theme stylesheet-->
+        <link rel="stylesheet" href="/static/css/style.sea.css" id="theme-stylesheet">
+        <link rel="stylesheet" href="/static/css/dateTime.css">
+        <link rel="stylesheet" type="text/css" media="all" href="/static/css/daterangepicker.css" />
+        <!-- Custom stylesheet - for your changes-->
+        <link rel="stylesheet" href="/static/css/custom.css">
+        <link rel="shortcut icon" href="/static/img/favicon.ico">
+        <link rel="stylesheet" type="text/css" href="/static/css/jquery.eeyellow.Timeline.css" />
+
+    </head>
+    <body >
+        <div class="page">
+            <!-- Main Navbar-->
+            <header class="header">
+                <nav class="navbar">
+
+                    <div class="container-fluid">
+                        <div class="navbar-holder d-flex align-items-center justify-content-between">
+                            <!-- Navbar Header-->
+                            <div class="navbar-header">
+                                <!-- Navbar Brand --><a href="{:url('Index/index')}" class="navbar-brand d-none d-sm-inline-block">
+                                    <div class="brand-text d-none d-lg-inline-block"><strong>演示医院</strong></div>
+                                </a>
+                                <!-- Toggle Button-->
+                                <a id="toggle-btn" href="#" class="menu-btn active"><span></span><span></span><span></span></a>
+                            </div>
+                            <!-- Navbar Menu -->
+                            <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
+                                <li><a href="{:url('Index/password')}"><i class="fa fa-user fa-fw"></i>{$_admin.username}</a></li>
+                                <li><a href="{:url('Index/logout')}"><i class="fa fa-power-off fa-fw"></i>退出</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </header>
+            <div class="page-content d-flex align-items-stretch"> 
+                <!-- Side Navbar -->
+                <nav class="side-navbar">
+                    <!-- Sidebar Header-->
+                    <div class="sidebar-header d-flex align-items-center">
+                        <div class="avatar"><img src="/static/img/avatar-1.jpg" alt="..." class="img-fluid rounded-circle"></div>
+                        <div class="title">
+                            <h1 class="h4">刘慧斌</h1>
+                            <p>护士长</p>
+                        </div>
+                    </div>
+                    <!-- Sidebar Navidation Menus-->
+                    <span class="heading">菜单</span>
+                    <ul class="list-unstyled">
+                        <li><a href="{:url('Incubatorinfo/searchbyroom', ['room' => '*'])}" > <i class="icon-home"></i>工作台</a></li>
+<!--                        <li><a href="{:url('index/index')}" > <i class="icon-home"></i>工作台2</a></li>-->
+                        
+                        <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse">
+                                <i class="icon-grid"></i>消毒管理 </a>
+                            <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
+                                <li><a href="{:url('Incubatorinfo/index')}">新箱登记</a></li>
+                                <li><a href="{:url('Incubatorinfo/search')}">暖箱维护</a></li>
+                                <li><a href="{:url('Incubatorinfo/reserve')}">预留暖箱</a></li>
+                                <li><a href="{:url('Incubatorinfo/userecord')}">使用登记</a></li>
+                                <li><a href="{:url('Incubatorinfo/planclean')}"> 定期消毒 </a></li>
+                            </ul>
+                        </li>
+
+                        <li><a href="#reportdropdownDropdown" aria-expanded="false" data-toggle="collapse">
+                                <i class="icon-screen"></i>报告中心 </a>
+                            <ul id="reportdropdownDropdown" class="collapse list-unstyled ">
+                                <li><a href="{:url('Incubatorinfo/reportcenter')}"> 业务概览 </a></li>
+                                <li><a href="{:url('Incubatorinfo/controlreport')}"> 操作记录 </a></li>
+                                <li><a href="{:url('Incubatorinfo/controlpath')}"> 隔离路径 </a></li>
+
+                            </ul>
+                        </li>
+                        <li><a href="#authdropdownDropdown" aria-expanded="false" data-toggle="collapse"> 
+                                <i class="icon-user"></i>权限管理 </a>
+                            <ul id="authdropdownDropdown" class="collapse list-unstyled ">
+                                <li><a href="{:url('sys/user')}">用户管理</a></li>
+
+                            </ul>
+                        </li>
+
+                    </ul>
+                </nav>
+                <div class="content-inner">
+                    <div class="main-content">{__CONTENT__}</div>
+
+                    <!-- Page Footer-->
+                    <footer class="main-footer">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <p>Copyright &copy; 2019.感控云 All rights reserved</p>
+                                </div>
+                                <div class="col-sm-6 text-right">
+                                    <p></p>
+                                    <!-- Please do not remove the backlink to us unless you support further theme's development at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
+                                </div>
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+            </div>
+        </div>
+        <canvas ></canvas>
+        <!-- JavaScript files-->
+        <script src="/static/vendor/jquery/jquery.min.js"></script>
+        <script src="https://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+        <script src="/static/js/dateTime.min.js"></script>
+        <script src="/static/vendor/popper.js/umd/popper.min.js"></script>
+        <script src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
+        <script src="/static/vendor/jquery.cookie/jquery.cookie.js"></script>
+        <script src="/static/vendor/chart.js/Chart.min.js"></script>
+        <script src="/static/js/charts-custom.js"></script>
+        <script src="/static/vendor/jquery-validation/jquery.validate.min.js"></script>
+        <script src="/static/js/charts-home.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js"></script>
+        <script type="text/javascript" src="/static/js/daterangepicker.js"></script>
+
+        <!-- Main File-->
+        <script src="/static/js/front.js"></script>
+        <script src="/static/js/common.js"></script>
+        <script type="text/javascript" src="js/jquery.eeyellow.Timeline.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('.VivaTimeline').vivaTimeline({
+                    carousel: true,
+                    carouselTime: 3000
+                });
+            });
+        </script>
+        <script>
+            $("#datetime").daterangepicker({
+                singleDatePicker: true,
+                startDate: moment().subtract(6, 'days'),
+                timePicker: true,
+                locale: {
+                    format: 'YYYY-MM-DD HH:mm:ss',
+                    separator: ' 到 ',
+                    applyLabel: '确定',
+                    cancelLabel: '取消',
+                    fromLabel: '起始时间',
+                    toLabel: '结束时间',
+                    customRangeLabel: '自定义',
+                    daysOfWeek: ['日', '一', '二', '三', '四', '五', '六'],
+                    monthNames: ['一月', '二月', '三月', '四月', '五月', '六月',
+                        '七月', '八月', '九月', '十月', '十一月', '十二月'],
+                    firstDay: 1
+                }
+            });
+        </script>
+
+        <script type="text/javascript">
+
+            $('#startDate').daterangepicker({
+                singleDatePicker: false,
+                startDate: moment().subtract(6, 'days'),
+                timePicker: true,
+                ranges: {
+                    //'最近1小时': [moment().subtract('hours',1), moment()],
+                    '今日': [moment().startOf('day'), moment()],
+                    '昨日': [moment().subtract('days', 1).startOf('day'), moment().subtract('days', 1).endOf('day')],
+                    '最近7日': [moment().subtract('days', 6), moment()],
+                    '最近30日': [moment().subtract('days', 29), moment()]
+                },
+                opens: 'right',
+                locale: {
+                    format: 'YYYY-MM-DD HH:mm:ss',
+                    separator: ' 到 ',
+                    applyLabel: '确定',
+                    cancelLabel: '取消',
+                    fromLabel: '起始时间',
+                    toLabel: '结束时间',
+                    customRangeLabel: '自定义',
+                    daysOfWeek: ['日', '一', '二', '三', '四', '五', '六'],
+                    monthNames: ['一月', '二月', '三月', '四月', '五月', '六月',
+                        '七月', '八月', '九月', '十月', '十一月', '十二月'],
+                    firstDay: 1
+                },
+
+            });
+        </script>
+
+    </body>
+</html>

@@ -1,0 +1,67 @@
+{layout name="common/layout" /}
+<div class="page-title-box">
+    <div class="row align-items-center">
+        <div class="col-sm-6">
+            <h4 class="page-title">设备检查</h4>
+        </div>
+        <div class="col-sm-6">
+            <ol class="breadcrumb float-right">
+                <li class="breadcrumb-item"><a href="javascript:void(0);">消毒管理</a></li>
+                <li class="breadcrumb-item"><a href="javascript:void(0);">使用登记</a></li>
+                <li class="breadcrumb-item active">设备检查</li>
+            </ol>
+        </div>
+    </div> <!-- end row -->
+</div>
+<!-- end page-title -->
+
+<div class="row">
+    <div class="col-12">
+        <div class="card m-b-30">
+            <div class="card-body">
+
+                <h4 class="mt-0 header-title">{$cleantype}</h4>
+                <p class="sub-title"> 设备编号：
+                    <code class="highlighter-rouge">{$incubinfo.code}号 </code>所在房间： 
+                    <code class="highlighter-rouge">{$incubinfo.room}</code>.</p>
+                {include file="common/alert" /}
+                <form>
+<!--                    <div class="form-group row">-->
+<!--                        <label for="example-number-input" class="col-sm-2 col-form-label">温度检查</label>-->
+<!--                        <div class="col-sm-10">-->
+<!--                            <input name="temperature" class="form-control" type="number" value="{$incubinfo.temperature}" id="example-number-input">-->
+<!--                        </div>-->
+<!--                    </div>-->
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">检查结果</label>
+                        <div class="col-sm-10">
+                            <select name="filterflag" class="form-control">
+                                <option>完全可用</option>
+                                <option>部分可用</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-sm-2 col-form-label">备注</label>
+                        <div class="col-sm-10">
+                            <textarea name="memo"  rows="3" cols="20" class="form-control" id="example-text-input">{$incubinfo.memo}</textarea>
+                            <input type="hidden" name="action" value="add" class="form-control">
+                            <input type="hidden" name="id" value="{$incubinfo.id}"  class="form-control">
+                            <input type="hidden" name="cleantype" value="{$cleantype}"  class="form-control">
+                            <input type="hidden" name="code" value="{$incubinfo.code}"  class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group row float-right"> 
+                        <div class="col-8 ">
+
+                            <input type="submit" value="检查完成" class="btn btn-primary mb-4 waves-effect waves-light">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div> <!-- end col -->
+</div> <!-- end row -->    
+

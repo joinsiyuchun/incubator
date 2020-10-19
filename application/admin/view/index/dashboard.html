@@ -1,0 +1,206 @@
+{layout name="common/dashboard" /}
+<div class="page-title-box">
+    <div class="row align-items-center">
+        <div class="col-sm-6">
+            <h4 class="page-title">我的工作台-{$roomname}</h4>
+        </div>
+
+        <div class="col-sm-6">
+            <ol class="breadcrumb float-right">
+
+
+
+                <!-- --select room -->
+                <li class="dropdown breadcrumb-item">
+                    <a class="nav-link dropdown-toggle arrow-none waves-effect" data-toggle="dropdown" href="#"
+                       role="button" aria-haspopup="false" aria-expanded="false">
+                        选择病区 <span class="mdi mdi-chevron-down"></span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated language-switch">
+                        <a class="dropdown-item" href="{:url('index/dashboard', ['room' => '*'])}"><span> 全部病区</span></a>
+
+                        {foreach $location as $v}
+                        <a class="dropdown-item" href="{:url('index/dashboard', ['room' => $v.room])}"><span> {$v.room} </span></a>
+                        {/foreach}
+
+
+                    </div>
+                </li>
+            </ol>
+
+
+        </div>
+
+    </div>
+    <!-- end row -->
+</div>
+<div class="row">
+
+    <div class="col-sm-6 col-xl-3">
+        <div class="card">
+            <div class="card-heading p-4">
+                <div class="mini-stat-icon float-right">
+                    <i class="mdi mdi-cube-outline bg-primary  text-white"></i>
+                </div>
+                <div>
+                    <h5 class="font-16">空闲</h5>
+                </div>
+                <h3 class="mt-4">{$total_available}</h3>
+                <div class="progress mt-4" style="height: 4px;">
+                    <div class="progress-bar bg-primary" role="progressbar" style="width: {$dailycleanpercent*100}%"
+                         aria-valuenow="{$dailycleanpercent}" aria-valuemin="0" aria-valuemax="1"></div>
+                </div>
+                <p class="text-muted mt-2 mb-0">当日消毒完成率<span class="float-right">{$dailycleanpercent*100}%</span></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-6 col-xl-3">
+        <div class="card">
+            <div class="card-heading p-4">
+                <div class="mini-stat-icon float-right">
+                    <i class="mdi mdi-briefcase-check bg-success text-white"></i>
+                </div>
+                <div>
+                    <h5 class="font-16">预留</h5>
+                </div>
+                <h3 class="mt-4">{$total_reserve}</h3>
+                <div class="progress mt-4" style="height: 4px;">
+                    <div class="progress-bar bg-success" role="progressbar" style="width: {$dailycleanpercentreseve*100}%"
+                         aria-valuenow="{$dailycleanpercentreseve}" aria-valuemin="0" aria-valuemax="1"></div>
+                </div>
+                <p class="text-muted mt-2 mb-0">当日消毒完成率<span class="float-right">{$dailycleanpercentreseve*100}%</span></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-6 col-xl-3">
+        <div class="card">
+            <div class="card-heading p-4">
+                <div class="mini-stat-icon float-right">
+                    <i class="mdi mdi-tag-text-outline bg-warning text-white"></i>
+                </div>
+                <div>
+                    <h5 class="font-16">使用中</h5>
+                </div>
+                <h3 class="mt-4">{$total_inuse}</h3>
+                <div class="progress mt-4" style="height: 4px;">
+                    <div class="progress-bar bg-warning" role="progressbar" style="width: {$dailycleanpercentinuse*100}%"
+                         aria-valuenow="{$dailycleanpercentinuse}" aria-valuemin="0" aria-valuemax="1"></div>
+                </div>
+                <p class="text-muted mt-2 mb-0">当日消毒完成率<span class="float-right">{$dailycleanpercentinuse*100}%</span></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-6 col-xl-3">
+        <div class="card">
+            <div class="card-heading p-4">
+                <div class="mini-stat-icon float-right">
+                    <i class="mdi mdi-buffer bg-danger text-white"></i>
+                </div>
+                <div>
+                    <h5 class="font-16">待终末消毒</h5>
+                </div>
+                <h3 class="mt-4">{$total_waitingclean}</h3>
+                <div class="progress mt-4" style="height: 4px;">
+                    <div class="progress-bar bg-danger" role="progressbar" style="width: {$dailycleanpercentwait*100}%"
+                         aria-valuenow="{$dailycleanpercentwait}" aria-valuemin="0" aria-valuemax="1"></div>
+                </div>
+                <p class="text-muted mt-2 mb-0">当日消毒完成率<span class="float-right">{$dailycleanpercentwait*100}%</span></p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- end row -->
+<!-- Dashboard Header Section    -->
+
+<div class="row">
+    <!-- Statistics -->
+    {include file="common/alert" /}
+    <div class="col-sm-6 col-xl-3">
+        {foreach $incubavailable as $v}
+        <div class="card faq-box border-primary">
+            <div class="card-body" >
+                
+                <h5 class="text-primary">{$v.code}/{$v.type}/{$v.status}</h5>
+                {if $v.dailyplan==1}
+
+                <p class="font-14 mb-2"><i class="ti-check-box {if $v.dailycleandt>date("Y-m-d")  } text-success{else}text-danger{/if}
+                                           mr-3"></i> {if $v.dailycleandt>date("Y-m-d")  }每日消毒：已完成{else}每日消毒：未完成{/if}</p>
+                                                      {/if}
+                                                      {if $v.weeklyplan==1}
+                                                      <p class="font-14 mb-2"><i class="ti-check-box {if $v.weeklycleandt>date('Y-m-d', strtotime('monday this week'))} text-success{else}text-danger{/if}">
+                                                              mr-3"></i> {if $v.weeklycleandt>date('Y-m-d', strtotime('monday this week'))}每日消毒：已完成{else}每日消毒：未完成{/if}</p>
+
+                                                      {/if}
+                </div>
+            </div>
+                {/foreach}
+            </div>
+
+            <div class="statistics col-lg-3 col-12">
+                {foreach $incubreserv as $v}
+               <div class="card faq-box border-success">
+            <div class="card-body">
+                
+                <h5 class="text-success">{$v.code}/{$v.type}/{$v.status}</h5>
+                {if $v.dailyplan==1}
+
+                <p class="font-14 mb-2"><i class="ti-check-box {if $v.dailycleandt>date("Y-m-d")  } text-success{else}text-danger{/if}
+                                           mr-3"></i> {if $v.dailycleandt>date("Y-m-d")  }每日消毒：已完成{else}每日消毒：未完成{/if}</p>
+                                                      {/if}
+                                                      {if $v.weeklyplan==1}
+                                                      <p class="font-14 mb-2"><i class="ti-check-box {if $v.weeklycleandt>date('Y-m-d', strtotime('monday this week'))} text-success{else}text-danger{/if}">
+                                                              mr-3"></i> {if $v.weeklycleandt>date('Y-m-d', strtotime('monday this week'))}每日消毒：已完成{else}每日消毒：未完成{/if}</p>
+
+                                                      {/if}
+                </div>
+            </div>
+                    {/foreach}
+                </div>
+                <div class="statistics col-lg-3 col-12">
+                    {foreach $incubinuse as $v}
+                    <div class="card faq-box border-warning">
+            <div class="card-body">
+                
+                <h5 class="text-warning">{$v.code}/{$v.type}/{$v.status}</h5>
+                {if $v.dailyplan==1}
+
+                <p class="font-14 mb-2"><i class="ti-check-box {if $v.dailycleandt>date("Y-m-d")  } text-success{else}text-danger{/if}
+                                           mr-3"></i> {if $v.dailycleandt>date("Y-m-d")  }每日消毒：已完成{else}每日消毒：未完成{/if}</p>
+                                                      {/if}
+                                                      {if $v.weeklyplan==1}
+                                                      <p class="font-14 mb-2"><i class="ti-check-box {if $v.weeklycleandt>date('Y-m-d', strtotime('monday this week'))} text-success{else}text-danger{/if}">
+                                                              mr-3"></i> {if $v.weeklycleandt>date('Y-m-d', strtotime('monday this week'))}每日消毒：已完成{else}每日消毒：未完成{/if}</p>
+
+                                                      {/if}
+                </div>
+            </div>
+                        {/foreach}
+                    </div>
+                    <div class="statistics col-lg-3 col-12">
+                        {foreach $incubclean as $v}
+                       <div class="card faq-box border-danger">
+            <div class="card-body">
+                
+                <h5 class="text-danger">{$v.code}/{$v.type}/{$v.status}</h5>
+                {if $v.dailyplan==1}
+
+                <p class="font-14 mb-2"><i class="ti-check-box {if $v.dailycleandt>date("Y-m-d")  } text-success{else}text-danger{/if}
+                                           mr-3"></i> {if $v.dailycleandt>date("Y-m-d")  }每日消毒：已完成{else}每日消毒：未完成{/if}</p>
+                                                      {/if}
+                                                      {if $v.weeklyplan==1}
+                                                      <p class="font-14 mb-2"><i class="ti-check-box {if $v.weeklycleandt>date('Y-m-d', strtotime('monday this week'))} text-success{else}text-danger{/if}">
+                                                              mr-3"></i> {if $v.weeklycleandt>date('Y-m-d', strtotime('monday this week'))}每日消毒：已完成{else}每日消毒：未完成{/if}</p>
+
+                                                      {/if}
+                </div>
+            </div>
+                            {/foreach}
+                        </div>
+                    </div>
+
+

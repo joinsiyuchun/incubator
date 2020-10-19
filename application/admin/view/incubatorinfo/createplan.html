@@ -1,0 +1,90 @@
+{layout name="common/layout2" /}
+<div class="page-title-box">
+    <div class="row align-items-center">
+        <div class="col-sm-6">
+            <h4 class="page-title">使用记录</h4>
+        </div>
+        <div class="col-sm-6">
+            <ol class="breadcrumb float-right">
+                <li class="breadcrumb-item"><a href="javascript:void(0);">后台管理</a></li>
+                <li class="breadcrumb-item"><a href="javascript:void(0);">消毒管理</a></li>
+                <li class="breadcrumb-item active">创建消毒计划</li>
+            </ol>
+        </div>
+    </div> <!-- end row -->
+</div>
+<!-- Forms Section-->
+<section class="forms"> 
+    <div class="container-fluid">
+
+        <!-- Basic Form-->
+        {include file="common/alert" /}
+        <div class="card">
+            <div class="card-body">
+                <form>
+                    <div class="form-group row">       
+                        <label class="form-control-label col-sm-2">计划编号</label>
+                        <input name="code" type="text" class="form-control col-sm-10" required/>
+                    </div>
+                    <div class="form-group row">       
+                        <label class="form-control-label col-sm-2">计划说明</label>
+                        <input type="text" name="memo" class="form-control col-sm-10" >
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 form-control-label">开始结束区间</label>
+
+                        <input type="text" name="startdt"  class="form-control mb-3 col-sm-10" id="startDate" readonly>
+
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 form-control-label">计划类型</label>
+
+                        <select name="cycle" class="form-control mb-3 col-sm-10" required>
+
+                            <option >每周消毒</option>
+                            <option selected>每天消毒</option>
+                        </select>
+
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 form-control-label">设备类型</label>
+
+                        <select name="type" class="form-control mb-3 col-sm-10" required>
+
+                            <option selected>婴儿暖箱</option>
+                            <option>转移箱</option>
+                            <option>婴儿光疗暖箱</option>
+                            <option>婴儿辐射保暖台</option>
+                            <option>其它</option>
+                        </select>
+
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 form-control-label ">消毒范围</label>
+
+                        <select name="room" class="form-control mb-3 col-sm-10"  required>
+
+                            <option selected>1病房</option>
+                            <option>2病房</option>
+                            <option>3病房</option>
+                            <option>4病房</option>
+                            <option>5病房</option>
+                            <option>6病房</option>
+                            <option>7病房</option>
+                            <option>8病房</option>
+                        </select>
+
+                    </div> 
+                    <div class="form-group row float-right">
+                        <div class="col-sm-12">
+                            <button type="reset" class="btn btn-secondary">重置表单</button>
+                            <button type="submit" class="btn btn-primary">提交保存</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+</section>

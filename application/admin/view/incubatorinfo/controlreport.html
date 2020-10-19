@@ -1,0 +1,187 @@
+{layout name="common/layout" /}
+<div class="page-title-box">
+    <div class="row align-items-center">
+        <div class="col-sm-6">
+            <h4 class="page-title">操作追溯</h4>
+        </div>
+        <div class="col-sm-6">
+            <ol class="breadcrumb float-right">
+                <li class="breadcrumb-item"><a href="javascript:void(0);">后台管理</a></li>
+                <li class="breadcrumb-item"><a href="javascript:void(0);">报告中心</a></li>
+                <li class="breadcrumb-item active">操作追溯</li>
+            </ol>
+        </div>
+    </div> <!-- end row -->
+</div>
+<!-- Forms Section-->
+<section class="forms"> 
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Form Elements -->
+            <div class="col-lg-12">
+                <div class="card">
+
+                    <div class="card-body">
+                        {include file="common/alert" /}
+                        <form class="form-horizontal">
+                            <div class="form-group row">
+                                <label class="col-sm-1 col-form-label">设备编号</label>
+                                <div class="col-sm-3">
+                                    <input type="text" name="code"  class="form-control">
+                                    <input type="hidden" name="action" value="add" class="form-control">
+                                </div>
+
+                                <label class="col-sm-1 col-form-label">故障描述</label>
+                                <div class="col-sm-3">
+                                    <input type="text" name="patientid"  class="form-control">
+                                </div>
+
+                                <label class="col-sm-1 col-form-label">故障类型</label>
+                                <div class="col-sm-3">
+                                    <input type="text" name="patientname"  class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-1 col-form-label">期间</label>
+                                <div class="col-sm-11">
+                                    <input type="text" name="startdt"  class="form-control" id="startDate" readonly>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-1 col-form-label">设备类型</label>
+                                <div class="col-sm-5">
+                                    <select name="type[]" class="form-control mb-3" multiple="multiple">
+                                        <option>婴儿暖箱</option>
+                                        <option>婴儿转移箱</option>
+                                        <option>婴儿光疗箱</option>
+                                        <option>婴儿辐射保暖台</option>
+                                        <option>其它</option>
+                                    </select>
+                                </div>
+
+                                <label class="col-sm-1 col-form-label">房间</label>
+                                <div class="col-sm-5">
+                                    <select name="room[]" class="form-control mb-3" multiple="multiple">
+                                        <option>1病房</option>
+                                        <option>2病房</option>
+                                        <option>3病房</option>
+                                        <option>4病房</option>
+                                        <option>5病房</option>
+                                        <option>6病房</option>
+                                        <option>7病房</option>
+                                        <option>8病房</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row float-right">
+                                <div class="col-sm-12">
+                                    <button type="reset" class="btn btn-secondary">重置条件</button>
+                                    <button type="submit" class="btn btn-primary">提交查询</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12">
+            <div class="card">
+                <h4 class="mt-0 header-title">&times;</h4>
+                <div class="col-sm-12 col-md-12 ">
+                    <div class="float-right">
+                        <div class="text-center">
+                            <a class="btn btn-primary buttons-copy buttons-html5" tabindex="0" 
+
+                               aria-controls="datatable-buttons" onclick="javascript:alert('请前往【报告中心-报告下载】查询');" href="{:url('incubatorinfo/controlreport', ['searchstring' => $searchstring])}">
+                                <span>数据导出</span>
+                            </a>
+                        </div>
+
+                        <!--                        <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-sm">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <p>数据导出完成。请前往"报告中心->报告下载"处下载报告。</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>-->
+                    </div>
+                </div>
+                <div class="card-body no-padding">
+
+                    <table class="datatable table table-striped primary" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+
+                                <th>暖箱编号</th>
+                                <th>暖箱类型</th>
+                                <th>所在病房</th>
+                                <th>事务类型</th>
+                                <th>事务时间</th>
+                                <th>病患编号</th>
+                                <th>病患姓名</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {foreach $dailyrecord as $v}
+                            <tr>
+
+                                <td>{$v.incubatorid}</td>
+                                <td>{$v.incubtype}</td>
+                                <td>{$v.room}</td>
+                                <td>{$v.operationtype}</td>
+
+                                <td>{$v.operationdt}</td>
+                                <td>{$v.patientno}</td>
+                                <td>{$v.patientname}</td>
+                            </tr>
+                            {/foreach}
+                            {if $dailyrecord->isEmpty()}
+                            <tr><td colspan="8" class="text-center">没有查询到相关记录</td></tr>
+                            {/if}    
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script type="text/javascript">
+
+            $('#startDate').daterangepicker({
+                singleDatePicker: false,
+                startDate: moment().subtract(6, 'days'),
+                timePicker: true,
+                ranges: {
+                    //'最近1小时': [moment().subtract('hours',1), moment()],
+                    '今日': [moment().startOf('day'), moment()],
+                    '昨日': [moment().subtract('days', 1).startOf('day'), moment().subtract('days', 1).endOf('day')],
+                    '最近7日': [moment().subtract('days', 6), moment()],
+                    '最近30日': [moment().subtract('days', 29), moment()]
+                },
+                opens: 'right',
+                locale: {
+                    format: 'YYYY-MM-DD HH:mm:ss',
+                    separator: ' 到 ',
+                    applyLabel: '确定',
+                    cancelLabel: '取消',
+                    fromLabel: '起始时间',
+                    toLabel: '结束时间',
+                    customRangeLabel: '自定义',
+                    daysOfWeek: ['日', '一', '二', '三', '四', '五', '六'],
+                    monthNames: ['一月', '二月', '三月', '四月', '五月', '六月',
+                        '七月', '八月', '九月', '十月', '十一月', '十二月'],
+                    firstDay: 1
+                },
+
+            });
+        </script>

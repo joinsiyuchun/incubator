@@ -1,0 +1,46 @@
+{layout name="common/layout" /}
+<!-- Page Header-->
+<header class="page-header">
+    <div class="container-fluid">
+        <h2 class="no-margin-bottom">设备档案-计划消毒</h2>
+    </div>
+</header>
+<!-- Forms Section-->
+ <section class="forms"> 
+            <div class="container-fluid">
+            
+                <!-- Basic Form-->
+               {include file="common/alert" /}
+                  <div class="card">
+                    
+                    <div class="card-header d-flex align-items-center">
+                      <h3 class="h4">计划消毒-预留暖箱</h3>
+                    </div>
+                    <div class="card-body">
+                      <p>暖箱编号：{$incubinfo.code}号 所在房间：{$incubinfo.room}</p>
+                      <form>
+                        
+                        <div class="form-group">       
+                          <label class="form-control-label">预留日期</label>
+                          <input type="text" name="reservedt" class="form-control" id="datetime" readonly>
+                           <input type="hidden" name="action" value="add" class="form-control">
+                           <input type="hidden" name="id" value="{$incubinfo.id}"  class="form-control">
+                        </div>
+                         <div class="form-group">       
+                          <label class="form-control-label">联系人</label>
+                          <input type="text" name="contact" class="form-control">
+                        </div>
+                          <div class="form-group">       
+                          <label class="form-control-label">联系方式</label>
+                          <input type="text" name="contactinfo" class="form-control">
+                        </div>
+                        <div class="form-group">       
+                          <input type="submit" value="提交" class="btn btn-primary">
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                
+             </div>
+           
+    </section>

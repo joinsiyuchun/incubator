@@ -1,0 +1,75 @@
+{layout name="common/layout" /}
+<div class="page-title-box">
+    <div class="row align-items-center">
+        <div class="col-sm-6">
+            <h4 class="page-title">设备报修</h4>
+        </div>
+        <div class="col-sm-6">
+            <ol class="breadcrumb float-right">
+                <li class="breadcrumb-item"><a href="javascript:void(0);">维修管理</a></li>
+                <li class="breadcrumb-item"><a href="javascript:void(0);">维修登记</a></li>
+                <li class="breadcrumb-item active">设备报修</li>
+            </ol>
+        </div>
+    </div> <!-- end row -->
+</div>
+<!-- end page-title -->
+<!-- Forms Section-->
+<div class="row">
+    <div class="col-12">
+        <div class="card m-b-30">
+            <div class="card-body">
+
+                <h4 class="mt-0 header-title">设备编号：{$incubinfo.code}</h4>
+                <p class="sub-title"> 
+                    所在房间： 
+                    <code class="highlighter-rouge">{$incubinfo.room}</code></p>
+                {include file="common/alert" /}
+
+
+                <form>
+                    <div class="form-group row">
+                        <label for="form-control-label1" class="col-sm-2 col-form-label">故障描述</label>
+                        <div class="col-sm-10">
+                            <input name="patientno" type="text" value="{$incubinfo.patientno}" id="form-control-label1" class="form-control" required>
+                            <input type="hidden" name="action" value="add" class="form-control">
+                            <input type="hidden" name="id" value="{$incubinfo.id}"  class="form-control">
+                            <input type="hidden" name="code" value="{$incubinfo.code}"  class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">       
+                        <label for="form-control-label2" class="col-sm-2 col-form-label">故障类型</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="patientname" value="{$incubinfo.patientname}" class="form-control" id="form-control-label2">
+                        </div>
+                    </div>
+                    <div class="form-group row">       
+                        <label for="form-control-label3" class="col-sm-2 col-form-label">联系人</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="contact" class="form-control" value="{$incubinfo.contact}" id="form-control-label3">
+                        </div>
+                    </div>
+                    <div class="form-group row">       
+                        <label for="form-control-label4" class="col-sm-2 col-form-label">联系方式</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="contactinfo" class="form-control" value="{$incubinfo.contactinfo}" id="form-control-label4">
+                        </div>
+                    </div>
+                    <div class="form-group row">       
+                        <label for="form-control-label5" class="col-sm-2 col-form-label">备注</label>
+                        <div class="col-sm-10">
+                            <textarea name="memo"  rows="3" class="form-control" cols="20" id="form-control-label5" >{$incubinfo.memo}</textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row float-right"> 
+                        <div class="col-8 ">
+
+                            <input type="submit" value="报修确认" class="btn btn-primary mb-4 waves-effect waves-light">
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div> <!-- end col -->
+</div> <!-- end row -->    

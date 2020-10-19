@@ -1,0 +1,75 @@
+{layout name="common/layout" /}
+   <!-- Datatable init js -->
+        <script src="/assets/pages/datatables.init.js"></script>   
+
+    <!-- Start content -->
+    <div class="content">
+        <div class="container-fluid">
+            <div class="page-title-box">
+                <div class="row align-items-center">
+                    <div class="col-sm-6">
+                        <h4 class="page-title">机构管理</h4>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-right">
+                            <li class="breadcrumb-item">通讯录</li>
+                            <li class="breadcrumb-item active">机构管理</li>
+                        </ol>
+                    </div>
+                </div> <!-- end row -->
+            </div>
+            <!-- end page-title -->
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card m-b-30">
+                        <div class="card-body">
+
+                            <h4 class="mt-0 header-title">机构列表</h4>
+                            <p class="sub-title">所有启用的机构需要启用【所属机构】，以支持跨机构报表合并，报告范围可以建立层级管理，可以按照销售管理区域、或者成本中心设置。</code>.
+                            </p>
+
+                            <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                <thead>
+                                    <tr>
+                                        <th>机构名称</th>
+                                        <th>法人名称</th>
+                                        <th>账户状态</th>
+                                        <th>统一社会信用代码</th>
+                                        <th>所属机构</th>
+                                        <th>启用日期</th>
+                                        <th >失效日期</th>
+                                    </tr>
+                                </thead>
+
+
+                                <tbody>
+                                    {foreach $companylist as $v}
+                                    <tr>
+                                        <td>{$v.name}</td>
+                                        <td>{$v.legal}</td>
+                                        <td>{$v.status}</td>
+                                        <td>{$v.unicode}</td>
+                                        <td>{$v.parent}</td>
+                                        <td>{$v.start_date}</td>
+                                        <td>{$v.expire_date}</td>
+                                       
+                                        
+                                    </tr>
+                                    {/foreach}
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div> <!-- end col -->
+            </div> <!-- end row -->
+
+          
+
+
+        </div>
+        <!-- container-fluid -->
+
+    </div>
+    <!-- content -->

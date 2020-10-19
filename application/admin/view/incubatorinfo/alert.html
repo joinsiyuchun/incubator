@@ -1,0 +1,7 @@
+{if isset($info)}
+<div class="col-sm-10 form-control-label" role="alert" >
+    <p style="color:red">{$info}</p></div>{/if}
+{if isset($success)}<div class="col-sm-10 form-control-label" role="alert">
+   <p style="color:red"> {$success}</p></div>{/if}
+{if isset($error)}<div class="col-sm-10 form-control-label" role="alert">
+    <p style="color:red">{$error}</p></div>{/if}
